@@ -28,7 +28,6 @@ import ch.qos.logback.core.Appender;
 import ch.qos.logback.core.ConsoleAppender;
 import org.slf4j.LoggerFactory;
 import org.sonarsource.sonarlint.core.client.api.common.LogOutput;
-import org.sonarsource.sonarlint.core.util.LoggedErrorHandler;
 
 public class SonarLintLogging {
   private static final String CUSTOM_APPENDER_NAME = "custom_stream";
@@ -47,14 +46,10 @@ public class SonarLintLogging {
   public static void set(LogOutput output) {
     appender.setTarget(output);
   }
-  
-  public static void setErrorHandler(LoggedErrorHandler errorHandler) {
-    appender.setErrorHandler(errorHandler);
-  }
-  
+
   private static void init() {
     ConsoleAppender<ILoggingEvent> defaultAppender = new ConsoleAppender<>();
-    defaultAppender.setContext( (LoggerContext) LoggerFactory.getILoggerFactory());
+    defaultAppender.setContext((LoggerContext) LoggerFactory.getILoggerFactory());
     defaultAppender.setName(DEFAULT_APPENDER_NAME);
     LevelFilter levelFilter = new LevelFilter();
     levelFilter.setLevel(Level.ERROR);

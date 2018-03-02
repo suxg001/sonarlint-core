@@ -234,6 +234,16 @@ public class StandaloneIssueMediumTest {
   }
 
   @Test
+  public void semanticErrorJava() throws IOException {
+    ClientInputFile inputFile = prepareInputFile("MyTest.java", "package its;public class MyTest {int a;int a;}", false);
+
+    final List<Issue> issues = new ArrayList<>();
+    AnalysisResults results = sonarlint.analyze(
+      new StandaloneAnalysisConfiguration(baseDir.toPath(), temp.newFolder().toPath(), Arrays.asList(inputFile), ImmutableMap.of()), issue -> issues.add(issue), null, null);
+    assertThat(results.failedAnalysisFiles()).containsExactly(inputFile);
+  }
+
+  @Test
   public void simplePhp() throws Exception {
 
     ClientInputFile inputFile = prepareInputFile("foo.php", "<?php\n"
