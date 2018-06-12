@@ -374,7 +374,9 @@ public class SonarLintLanguageServer implements LanguageServer, WorkspaceService
   }
 
   private static List<String> toList(List<WorkspaceFolder> workspaceFolders) {
-    return workspaceFolders.stream().map(f -> f.getUri().replaceAll("^file://", "")).collect(Collectors.toList());
+    return workspaceFolders.stream()
+      .map(f -> Paths.get(f.getUri()).toString())
+      .collect(Collectors.toList());
   }
 
   // visible for testing
@@ -733,12 +735,12 @@ public class SonarLintLanguageServer implements LanguageServer, WorkspaceService
 
   // visible for testing
   static Path findBaseDir(List<String> workspaceFolders, URI uri) {
-    Path inputFilePath = Paths.get(uri);
+    Path inputFilePath = Paths.get(uri.toString());
     if (!workspaceFolders.isEmpty()) {
       String uriString = inputFilePath.toString();
       for (String folder : workspaceFolders) {
         if (uriString.startsWith(folder)) {
-          return Paths.get(folder);
+          return Paths.get(folder.replaceAll("^file:/", ""));
         }
       }
     }

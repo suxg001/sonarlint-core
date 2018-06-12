@@ -927,4 +927,19 @@ public class SonarLintLanguageServerTest {
     when(workspaceFolder.getUri()).thenReturn(path);
     return workspaceFolder;
   }
+
+  @Test
+  public void test_uri() {
+    // transform string file:///path/to/file
+    // and uri file:/path/to/file
+    // to common format
+    String uriAsString = "file:///path/to/file";
+    URI uri = URI.create("file:/path/to/file");
+    System.out.println(uriAsString);
+    System.out.println(uri);
+
+    System.out.println(Paths.get(uriAsString).toString());
+    System.out.println(uri.toString());
+    System.out.println(URI.create(uriAsString).toString());
+  }
 }
