@@ -34,15 +34,15 @@ public class ProjectFileListDownloader {
     this.wsClient = wsClient;
   }
 
-  public List<File> get(String projectKey, ProgressWrapper progress) {
+  public List<String> get(String projectKey, ProgressWrapper progress) {
     String path = buildPath(projectKey);
-    List<File> files = new ArrayList<>();
+    List<String> files = new ArrayList<>();
 
     SonarLintWsClient.getPaginated(wsClient, path,
       WsComponents.TreeWsResponse::parseFrom,
       WsComponents.TreeWsResponse::getPaging,
       WsComponents.TreeWsResponse::getComponentsList,
-      component -> files.add(new File(component.getKey(), component.getPath())), true, progress);
+      component -> files.add(component.getKey()), false, progress);
     return files;
   }
 
@@ -52,23 +52,5 @@ public class ProjectFileListDownloader {
       path += "&organization=" + StringUtils.urlEncode(wsClient.getOrganizationKey());
     }
     return path;
-  }
-
-  public static class File {
-    private String key;
-    private String path;
-
-    private File(String key, String path) {
-      this.key = key;
-      this.path = path;
-    }
-
-    public String key() {
-      return key;
-    }
-
-    public String path() {
-      return path;
-    }
   }
 }
