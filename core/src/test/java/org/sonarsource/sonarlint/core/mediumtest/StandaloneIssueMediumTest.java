@@ -250,6 +250,7 @@ public class StandaloneIssueMediumTest {
   }
 
   @Test
+<<<<<<< HEAD
   public void returnLanguagePerFile() throws IOException {
     ClientInputFile inputFile = prepareInputFile("foo.xoo", "function foo() {\n"
       + "  var xoo;\n"
@@ -260,6 +261,15 @@ public class StandaloneIssueMediumTest {
     AnalysisResults results = sonarlint.analyze(
       new StandaloneAnalysisConfiguration(baseDir.toPath(), temp.newFolder().toPath(), Collections.singletonList(inputFile), ImmutableMap.of()), issues::add, null, null);
     assertThat(results.languagePerFile()).containsExactly(entry(inputFile, "xoo"));
+=======
+  public void semanticErrorJava() throws IOException {
+    ClientInputFile inputFile = prepareInputFile("MyTest.java", "package its;public class MyTest {int a;int a;}", false);
+
+    final List<Issue> issues = new ArrayList<>();
+    AnalysisResults results = sonarlint.analyze(
+      new StandaloneAnalysisConfiguration(baseDir.toPath(), temp.newFolder().toPath(), Arrays.asList(inputFile), ImmutableMap.of()), issue -> issues.add(issue), null, null);
+    assertThat(results.failedAnalysisFiles()).containsExactly(inputFile);
+>>>>>>> feature/remove_log_error_handler
   }
 
   @Test

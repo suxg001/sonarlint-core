@@ -35,6 +35,10 @@ import org.sonarsource.sonarlint.core.client.api.standalone.StandaloneAnalysisCo
 import org.sonarsource.sonarlint.core.client.api.standalone.StandaloneGlobalConfiguration;
 import org.sonarsource.sonarlint.core.client.api.standalone.StandaloneSonarLintEngine;
 import org.sonarsource.sonarlint.core.container.standalone.StandaloneGlobalContainer;
+<<<<<<< HEAD
+=======
+import org.sonarsource.sonarlint.core.log.SonarLintLogging;
+>>>>>>> feature/remove_log_error_handler
 import org.sonarsource.sonarlint.core.util.ProgressWrapper;
 
 import static com.google.common.base.Preconditions.checkNotNull;

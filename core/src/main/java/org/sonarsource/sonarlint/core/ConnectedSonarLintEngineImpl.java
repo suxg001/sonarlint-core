@@ -56,6 +56,10 @@ import org.sonarsource.sonarlint.core.client.api.exceptions.StorageException;
 import org.sonarsource.sonarlint.core.container.connected.ConnectedContainer;
 import org.sonarsource.sonarlint.core.container.storage.StorageContainer;
 import org.sonarsource.sonarlint.core.container.storage.StorageContainerHandler;
+<<<<<<< HEAD
+=======
+import org.sonarsource.sonarlint.core.log.SonarLintLogging;
+>>>>>>> feature/remove_log_error_handler
 import org.sonarsource.sonarlint.core.util.ProgressWrapper;
 
 import static com.google.common.base.Preconditions.checkNotNull;
